@@ -79,7 +79,7 @@ end)
 hook.Add("IGS.PlayerPurchasedItem","IGS.BroadcastPurchase",function(pl, ITEM)
 	if IGS.C.BroadcastPurchase == false then return end -- #todo сделать модулем
 
-	IGS.NotifyAll(pl:Nick() .. " купил " .. ITEM:Name())  --  .. " за " .. PL_MONEY(ITEM:Price())
+	-- IGS.NotifyAll(pl:Nick() .. " купил " .. ITEM:Name())  --  .. " за " .. PL_MONEY(ITEM:Price())
 end)
 
 
@@ -107,7 +107,7 @@ hook.Add("IGS.PaymentStatusUpdated","IGS.BroadcastCharge",function(pl,dat)
 		local igs = dat.orderSum
 		local rub = IGS.RealPrice(igs)
 
-		IGS.NotifyAll(pl:Nick() .. " пополнил счет через " .. method_beauty .. " на " .. PL_MONEY(rub))
+		-- IGS.NotifyAll(pl:Nick() .. " пополнил счет через " .. method_beauty .. " на " .. PL_MONEY(rub))
 
 	elseif dat.method == "error" then
 		IGS.Notify(pl,"Похоже, у вас возникла ошибка в процессе пополнения счета")

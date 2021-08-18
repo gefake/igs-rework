@@ -25,7 +25,7 @@ function STORE_ITEM:SetULXGroup(sUserGroup, iGroupWeight)
 		end
 
 		if !valid then
-			IGS.NotifyAll("Автовосстановление " .. self:Name() .. " для " .. pl:Name())
+			-- IGS.NotifyAll("Автовосстановление " .. self:Name() .. " для " .. pl:Name())
 			return false
 		end
 	end)

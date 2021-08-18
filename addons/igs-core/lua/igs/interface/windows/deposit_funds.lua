@@ -13,13 +13,29 @@ function IGS.WIN.Deposit(iRealSum)
 	local cd = !IGS.IsCurrencyEnabled() -- cd = currency disabled. Bool
 	local realSum = math.max(IGS.GetMinCharge(), niceSum(iRealSum, 0))
 
+	f = vgui.Create('DButton')
+	f:SetSize(ScrW(), ScrH())
+	f:MakePopup()
+	f:SetText('')
+	function f:Paint(w, h)
+		draw.RoundedBox(0, -1, -1, w+2, h+2, Color(0,0,0, 225))
+	end
+	function f:DoClick()
+		if IsValid(m) then
+			m:Remove()
+		end
+
+		f:Remove()
+	end
+
 	m = uigs.Create("igs_frame", function(self)
 		self:SetSize(450,400)
-		self:RememberLocation("igs_deposit")
+		self:SetTitle("Пополнение жетонов Метро")
+		self:Center()
 
 		-- Вы, конечно, можете удалить наш копирайт. Чтобы вы не перенапряглись, я даже подготовил чуть ниже строчку для этого
 		-- Но прежде, чем ты это сделаешь, ответь себе на вопрос. Нахуя? Так мешает?
-		self:SetTitle("Автодонат от gm-donate.ru")
+		-- self:SetTitle("Автодонат от gm-donate.ru")
 		-- self:SetTitle("Владелец этого сервера мразь, не ценящая чужой труд")
 
 		self:MakePopup()
@@ -29,18 +45,11 @@ function IGS.WIN.Deposit(iRealSum)
 		--[[-------------------------------------
 			Левая колонка. Реальная валюта
 		---------------------------------------]]
-		uigs.Create("DLabel", function(real)
-			real:SetSize(cd and 450 or 180,25)
-			real:SetPos(cd and 0 or 10,self:GetTitleHeight())
-			real:SetText(cd and "Введите ниже сумму пополнения счета" or "Рубли")
-			real:SetFont("igs.22")
-			real:SetTextColor(IGS.col.HIGHLIGHTING)
-			real:SetContentAlignment(2)
-		end, self)
 
 		self.real_m = uigs.Create("DTextEntry", self)
-		self.real_m:SetPos(10,50)
-		self.real_m:SetSize(cd and 450 - 10 - 10 or 180,30)
+		self.real_m:SetPos(5,30)
+		self.real_m:SetFont("ixMediumFont")
+		self.real_m:SetSize(cd and 450 - 5 - 5 or 180, 50)
 		self.real_m:SetNumeric(true)
 		self.real_m.OnChange = function(s)
 			if cd then return end
@@ -50,7 +59,7 @@ function IGS.WIN.Deposit(iRealSum)
 			local rub = tonumber(self.real_m:GetValue())
 			if cd then
 				self.purchase:SetText(
-					"Пополнить счет на " .. niceSum(rub,0) .. " руб"
+					"Пополнить счет на " .. PL_IGS(niceSum(rub,0))
 				)
 			else
 				local igs = tonumber(self.curr_m:GetValue())
@@ -61,6 +70,11 @@ function IGS.WIN.Deposit(iRealSum)
 			end
 
 			self.purchase:SetActive(rub and rub > 0)
+		end
+		self.OnRemove = function(this)
+			if IsValid(f) then
+				f:Remove()
+			end
 		end
 
 		--[[-------------------------------------
@@ -80,7 +94,7 @@ function IGS.WIN.Deposit(iRealSum)
 		self.purchase = uigs.Create("igs_button", function(p)
 			local _,ry = self.real_m:GetPos()
 
-			p:SetSize(400,40)
+			p:SetSize(436,60)
 			p:SetActive(true) -- выделяет синим
 			p:SetPos((self:GetWide() - p:GetWide()) / 2,ry + self.real_m:GetTall() + 10)
 
@@ -142,8 +156,8 @@ function IGS.WIN.Deposit(iRealSum)
 			Все подряд
 		---------------------------------------------------------------------------]]
 		self.log = uigs.Create("igs_scroll", function(log)
-			log:SetSize(250,200)
-			log:SetPos(10,self:GetTall() - log:GetTall() - 10)
+			log:SetSize(self:GetWide(),165)
+			log:SetPos(10,self:GetTall() - log:GetTall() - 40)
 			-- https://img.qweqwe.ovh/1487171563683.png
 			function log:AddRecord(text,pay)
 				local col =
@@ -205,7 +219,8 @@ function IGS.WIN.Deposit(iRealSum)
 			local _,log_y = self.log:GetPos()
 
 			btn:SetSize(170, 30)
-			btn:SetPos(self:GetWide() - 10 - btn:GetWide(),log_y - 20)
+			btn:DockMargin(4, 4, 4, 4)
+			btn:Dock(BOTTOM)
 			btn:SetText("Активировать купон")
 			btn.DoClick = function()
 				IGS.WIN.ActivateCoupon()

@@ -57,7 +57,7 @@ if SERVER then return end -- не смотрите так на меня :)
 
 -- Показывать ли уведомление о новых предметах в донат меню
 -- Выглядит вот так https://img.qweqwe.ovh/1526574184864.png
-IGS.C.NotifyAboutNewItems = true
+IGS.C.NotifyAboutNewItems = false
 
 
 -- Эта иконка будет отображена для предмета, если для него не будет установлена кастомная через :SetIcon()

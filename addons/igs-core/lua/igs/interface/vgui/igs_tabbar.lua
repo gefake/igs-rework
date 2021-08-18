@@ -1,6 +1,6 @@
 local PANEL = {}
 
-local barTall = 50
+local barTall = 55
 local btnWide = 70
 
 function PANEL:Init()
@@ -38,7 +38,7 @@ function PANEL:AddTab(sTitle,panel,sIcon,bActive)
 	local ID = self.activity:AddPanel(panel,bActive)
 
 	local button = uigs.Create("DButton", function(btn)
-		btn:SetSize(btnWide, 50)
+		btn:SetSize(btnWide, 55)
 		btn:SetText("")
 
 		btn:SetFont("igs.24")

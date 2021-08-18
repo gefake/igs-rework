@@ -62,6 +62,22 @@ end
 
 function IGS.WIN.Item(uid)
 	local ITEM = IGS.GetItemByUID(uid)
+
+	f = vgui.Create('DButton')
+	f:SetSize(ScrW(), ScrH())
+	f:MakePopup()
+	f:SetText('')
+	function f:Paint(w, h)
+		draw.RoundedBox(0, -1, -1, w+2, h+2, Color(0,0,0, 225))
+	end
+	function f:DoClick()
+		if IsValid(m) then
+			m:Remove()
+		end
+
+		f:Remove()
+	end
+
 	if IsValid(m) then
 		if m.item_uid == uid then -- попытка повторного открытия того же фрейма
 
@@ -79,10 +95,15 @@ function IGS.WIN.Item(uid)
 	surface.PlaySound("ambient/weather/rain_drip1.wav")
 
 	m = uigs.Create("igs_frame", function(self)
-		self:SetSize(330,550)
-		self:RememberLocation("igs_item")
+		self:SetSize(450,550)
+		self:Center()
 		self:MakePopup()
 		self:SetTitle(ITEM:Name())
+		self.OnRemove = function(this)
+			if IsValid(f) then
+				f:Remove()
+			end
+		end
 
 		self.item_uid  = uid -- для предотвращения повторного открытия двух одинаковых фреймов
 	end)
@@ -117,7 +138,7 @@ function IGS.WIN.Item(uid)
 
 		p:Dock(FILL)
 		p:SetIcon(ITEM:ICON())
-		p:SetName("Действует " .. IGS.TermToStr(ITEM:Term()))
+		-- p:SetName("Действует " .. IGS.TermToStr(ITEM:Term()))
 		p:SetImage(ITEM:IMG())
 		p:SetSubNameButton(ITEM:Group() and ITEM:Group():Name(), function()
 			IGS.WIN.Group(ITEM:Group():UID())
@@ -129,22 +150,21 @@ function IGS.WIN.Item(uid)
 		m.buy = uigs.Create("igs_button", function(buy)
 			local cur_price = ITEM:PriceInCurrency()
 
-			buy:Dock(TOP)
-			buy:SetTall(20)
+			buy:Dock(FILL)
+			buy:SetTall(40)
+			buy:SetFont("ixMenuButtonFontSmall")
 			buy:SetText( "Купить за " .. PL_IGS(cur_price) )
 			buy:SetActive( IGS.CanAfford(LocalPlayer(), cur_price) )
 			buy.DoClick = function(s)
 				if !s:IsActive() then
 					local need = cur_price - LocalPlayer():IGSFunds()
 
-					surface.PlaySound("ambient/voices/citizen_beaten1.wav") -- еще есть
 					IGS.BoolRequest(
 						"Недостаточно денег",
 						("Вам не хватает %s для покупки %s.\nЖелаете мгновенно пополнить счет?"):format( PL_IGS(need), ITEM:Name()),
 						function(yes)
 							if yes then
 								IGS.WIN.Deposit(IGS.RealPrice(need), true)
-								surface.PlaySound("vo/npc/male01/yeah02.wav")
 							end
 						end
 					):ShowCloseButton(true)

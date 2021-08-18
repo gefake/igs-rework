@@ -43,6 +43,12 @@
 -- 	-- БАННЕР 1000х400 (Не обязательно). Отобразится в подробностях итема
 -- 	:SetImage("http://i.imgur.com/RqsP5nP.png")
 
+local colors = {
+	info = Color(84, 103, 133),
+	success = Color(80, 119, 64),
+	error = Color(128, 69, 69),
+	warning = Color(128, 124, 69)
+}
 
 /************************************************************
 	Доступ к энтити, оружию и машинам через спавнменю
@@ -51,12 +57,22 @@ IGS("Арбалет с HL", "wep_arbalet"):SetWeapon("weapon_crossbow")
 	:SetPrice(5000)
 	:SetTerm(30)
 	:SetDescription("Разрешает спавнить Арбалет через спавн меню в любое время")
-	:SetIcon("models/weapons/w_crossbow.mdl", true) -- true значит, что указана моделька, а не ссылка
+	:SetIcon("https://i.imgur.com/C4XyaFr.png") -- true значит, что указана моделька, а не ссылка
+	:SetAttributes({
+		{"Информация", colors.success, "Подписка"},
+		{"Когда активировать", colors.success, "В любой момент, если у тебя ещё не активировано данное улучшение"},
+		{"Срок действия", colors.info, "Одна неделя"},
+	})
 
 IGS("Джип с HL", "veh_jeep"):SetVehicle("Jeep")
 	:SetPrice(2000)
 	:SetTerm(30)
 	:SetDescription("Разрешает спавнить джип с халвы через спавн меню в любое время")
+	:SetAttributes({
+		{"Информация", colors.success, "Подписка"},
+		{"Когда активировать", colors.success, "В любой момент, если у тебя ещё не активировано данное улучшение"},
+		{"Срок действия", colors.info, "Одна неделя"},
+	})
 
 
 
@@ -67,11 +83,21 @@ IGS("Доступ к Веревке","verevka_na_mesyac"):SetTool("rope")
 	:SetPrice(50)
 	:SetTerm(30) -- 30 дней
 	:SetDescription("Для соединения двух объектов или написания матов на стенах :)")
+	:SetAttributes({
+		{"Информация", colors.success, "Подписка"},
+		{"Когда активировать", colors.success, "В любой момент, если у тебя ещё не активировано данное улучшение"},
+		{"Срок действия", colors.info, "Одна неделя"},
+	})
 
 IGS("Доступ к Лебёдке","lebedka_navsegda"):SetTool("winch")
 	:SetPrice(100)
 	:SetPerma()
 	:SetDescription("Лебёдка это веревка, способная становиться короче или длиннее")
+	:SetAttributes({
+		{"Информация", colors.success, "Подписка"},
+		{"Когда активировать", colors.success, "В любой момент, если у тебя ещё не активировано данное улучшение"},
+		{"Срок действия", colors.info, "Одна неделя"},
+	})
 
 
 /************************************************************
@@ -85,11 +111,21 @@ local HEAL = IGS("Аптечка", "heal_10hp", 0)
 	:SetStackable()
 	:SetHidden()
 	:SetOnActivate(function(pl) pl:SetHealth(pl:Health() + 10) end)
+	:SetAttributes({
+		{"Информация", colors.success, "Подписка"},
+		{"Когда активировать", colors.success, "В любой момент, если у тебя ещё не активировано данное улучшение"},
+		{"Срок действия", colors.info, "Одна неделя"},
+	})
 
 IGS("Набор аптечек", "heal_x5", 20)
 	:SetDescription("Вы получите в инвентарь 5 аптечек")
 	:SetStackable()
 	:SetItems({HEAL, HEAL, HEAL, HEAL, HEAL}) -- вы можете использовать и разные предметы
+	:SetAttributes({
+		{"Информация", colors.success, "Подписка"},
+		{"Когда активировать", colors.success, "В любой момент, если у тебя ещё не активировано данное улучшение"},
+		{"Срок действия", colors.info, "Одна неделя"},
+	})
 
 
 

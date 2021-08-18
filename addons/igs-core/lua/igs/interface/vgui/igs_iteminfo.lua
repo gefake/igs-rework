@@ -112,7 +112,7 @@ end
 function PANEL:AddPanel(sTitle,panel)
 	-- https://img.qweqwe.ovh/1486595573943.png
 	local background = uigs.Create("Panel", function(bg)
-		bg:DockPadding(10,0,10,0) -- отступы по краям внутри скролла
+		bg:DockPadding(12, 0, 12, 0) -- отступы по краям внутри скролла
 		bg.Paint = function(s,w,h) -- линия снизу посередине панели https://img.qweqwe.ovh/1491948928484.png
 			surface.SetDrawColor(IGS.col.SOFT_LINE)
 			surface.DrawLine(10,h - 1,w - 10,h - 1)
@@ -195,26 +195,25 @@ function PANEL:SetInfo(tInf)
 	for k,v in pairs(tInf) do
 		local line_bg = uigs.Create("Panel", pnl)
 		line_bg:SetTall(15)
+		line_bg:DockMargin(0, 2, 2, 2)
 		line_bg:Dock(TOP)
 
 		uigs.Create("DLabel", function(key)
 			key:Dock(LEFT)
-			key:SetWide(80)
-			key:SetFont("igs.15")
+			key:SetWide(90)
+			key:SetFont("ixSmallFont")
 			key:SetTextColor(IGS.col.TEXT_SOFT)
 			key:SetText(k)
-			key:SetContentAlignment(6)
 		end, line_bg)
 
 		uigs.Create("DLabel", function(key)
 			key:Dock(FILL)
-			key:SetFont("igs.15")
+			key:SetFont("ixSmallFont")
 			key:SetTextColor(IGS.col.TEXT_HARD)
 			key:SetText("  " .. v)
-			key:SetContentAlignment(4)
 		end, line_bg)
 
-		y = y + 15
+		y = y + 20
 	end
 
 	pnl:SetTall(y)

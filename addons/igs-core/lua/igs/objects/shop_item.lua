@@ -93,6 +93,15 @@ function STORE_ITEM:Category()
 	return self.category
 end
 
+-- Атрибуты (Helix)
+function STORE_ITEM:SetAttributes(attribTable)
+	return set(self,"attributes",attribTable)
+end
+
+function STORE_ITEM:GetAttributes()
+	return self.attributes
+end
+
 -- Срок в днях, на который выдается услуга. 0 если одноразовая. nil, если вечная
 function STORE_ITEM:SetTerm(iDays)
 	return set(self,"termin",iDays)
@@ -332,6 +341,7 @@ function IGS.AddItem(sName,sUID,iPrice)
 		uid  = sUID:lower(),
 		id   = IGS.ITEMS.count,
 		description = "",
+		attributes = {"Test", Color(255, 255, 0), "Test desc"},
 		termin = 0 -- если не изменить, то услуга не добавится в покупки. Только в транзакции
 	}, STORE_ITEM)
 

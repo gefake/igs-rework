@@ -23,7 +23,7 @@ end
 
 local font_exists
 function PANEL:Init()
-	self:SetSize(180,70)
+	self:SetSize(195,195)
 
 	if !font_exists then
 		surface.CreateFont("roboto_15",{
@@ -49,7 +49,7 @@ function PANEL:SetItem(STORE_ITEM)
 
 	self:SetTitleColor(STORE_ITEM:GetHighlightColor()) -- nil
 
-	self:SetSign( "Действ. " .. IGS.TermToStr(STORE_ITEM:Term()) )
+	-- self:SetSign( "Действ. " .. IGS.TermToStr(STORE_ITEM:Term()) )
 
 	self:SetBottomText( getBottomText(STORE_ITEM, true) )
 
@@ -60,8 +60,10 @@ function PANEL:SetName(sName)
 	(self.icon or self):SetTooltip(sName .. (self.item and "\n\n" .. self.item:Description():gsub("\n\n","\n") or ""))
 
 	self.name = self.name or uigs.Create("DLabel", function(lbl)
+		lbl:DockMargin(10, 10, 10, 10)
+		lbl:Dock(BOTTOM)
 		lbl:SetTall(20)
-		lbl:SetFont("roboto_20")
+		lbl:SetFont("igs.24")
 		lbl:SetTextColor(self.title_color or IGS.col.TEXT_HARD)
 	end, self)
 
@@ -71,23 +73,24 @@ function PANEL:SetName(sName)
 end
 
 function PANEL:SetSign(sSignature)
-	self.sign = self.sign or uigs.Create("DLabel", function(lbl)
-		lbl:SetTall(15)
-		lbl:SetFont("roboto_15")
-		lbl:SetTextColor(IGS.col.TEXT_SOFT)
-	end, self)
+	-- self.sign = self.sign or uigs.Create("DLabel", function(lbl)
+	-- 	lbl:SetTall(15)
+	-- 	lbl:SetFont("roboto_15")
+	-- 	lbl:SetTextColor(IGS.col.TEXT_SOFT)
+	-- end, self)
 
-	self.sign:SetText(sSignature)
+	-- self.sign:SetText(sSignature)
 
-	return self.sign
+	-- return self.sign
 end
 
 function PANEL:SetBottomText(sBottomText)
 	self.bottom = self.bottom or uigs.Create("DLabel", function(lbl)
+		lbl:DockMargin(10, 0, 10, 0)
+		lbl:Dock(BOTTOM)
 		lbl:SetTall(15)
-		lbl:SetFont("roboto_15")
-		lbl:SetTextColor(IGS.col.TEXT_SOFT)
-		lbl:SetContentAlignment(5)
+		lbl:SetFont("igs.20")
+		lbl:SetTextColor(Color(218, 255, 211))
 		-- lbl:SetWrap(true)
 		-- lbl:SetAutoStretchVertical(true)
 	end, self)
@@ -111,10 +114,10 @@ function PANEL:SetIcon(sIco,bIsModel) -- :SetIcon() для сброса
 	end
 
 	if !self.icon then
-		local icobg = uigs.Create("Panel", self)
-		icobg:SetSize(40,40)
-		icobg:SetPos(2,2)
-		icobg.Paint = IGS.S.RoundedPanel
+		-- local icobg = uigs.Create("Panel", self)
+		-- icobg:SetSize(40,40)
+		-- icobg:SetPos(2,2)
+		-- icobg.Paint = IGS.S.RoundedPanel
 
 		self.icon = bIsModel and uigs.Create("DModelPanel", function(mdl)
 			mdl:Dock(FILL)
@@ -131,15 +134,15 @@ function PANEL:SetIcon(sIco,bIsModel) -- :SetIcon() для сброса
 			mdl:SetCamPos(Vector(size, size, size))
 			mdl:SetLookAt((mn + mx) * 0.5)
 			mdl.LayoutEntity = function() return false end
-		end, icobg)
+		end, self)
 
 		-- НЕ моделька (Ссылка на иконку)
 		or
 
 		uigs.Create("igs_wmat", function(ico)
 			ico:Dock(FILL)
-			ico:DockMargin(2,2,2,2)
-		end, icobg)
+			ico:DockMargin(40,20,40,20)
+		end, self)
 	end
 
 	if bIsModel then
@@ -166,8 +169,8 @@ function PANEL:PerformLayout()
 	end
 
 	local nx,ny = self.name:GetPos() -- n = name
-	self.sign:SetPos(nx, ny + self.name:GetTall() + 2)
-	self.sign:SetWide(self.name:GetWide())
+	-- self.sign:SetPos(nx, ny + self.name:GetTall() + 2)
+	-- self.sign:SetWide(self.name:GetWide())
 
 	if self.bottom then
 		self.bottom:SetPos(2, 2 + 40 + 9)
@@ -185,13 +188,16 @@ end
 
 
 function PANEL:Paint(w,h)
-	IGS.S.RoundedPanel(self, w,h)
+    surface.SetDrawColor(132, 105, 76)
+    surface.DrawRect(0, 0, w, h)
+
+	-- IGS.S.RoundedPanel(self, w, h)
 
 	if self.bottom then
 		local bx,by = self.bottom:GetPos()
 
 		surface.SetDrawColor( IGS.col.HARD_LINE )
-		surface.DrawLine(bx + 5,by - 2,bx + self.bottom:GetWide() - 10,by - 2)
+		-- surface.DrawLine(bx + 5,by - 2,bx + self.bottom:GetWide() - 10,by - 2)
 	end
 
 	return true

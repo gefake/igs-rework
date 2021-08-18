@@ -21,7 +21,9 @@ function PANEL:IsActive()
 end
 
 function PANEL:Paint(w,h)
-	draw.RoundedBox(4,0,0,w,h,IGS.col.HIGHLIGHTING) -- outline
+	local strokeCol = self.Hovered and IGS.col.HIGHLIGHTING or ColorAlpha(IGS.col.HIGHLIGHTING, 240)
+
+	draw.RoundedBox(4,0,0,w,h, strokeCol) -- outline
 
 	if !self.active then
 		draw.RoundedBox(4,1,1,w - 2,h - 2,IGS.col.PASSIVE_SELECTIONS) -- bg TODO изменить, сделав как-то прозрачным

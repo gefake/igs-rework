@@ -66,8 +66,8 @@ function IGS.UI()
 
 	mf = uigs.Create("igs_frame", function(self)
 		-- 580 = (items_in_line * item_pan_wide) + (10(margin) * (items_in_line + 1))
-		self:SetSize(math.min(ScrW(), 800), math.min(ScrH(), 500)) -- позволяет закрыть окно на ущербных разрешениях
-		self:RememberLocation("igs")
+		self:SetSize(ScrW() * 0.55, ScrH() * 0.6) -- позволяет закрыть окно на ущербных разрешениях
+		self:Center()
 		self:MakePopup()
 
 		-- если повесить на фрейм, то драг сломается
@@ -87,7 +87,7 @@ function IGS.UI()
 		end
 
 		self:SetPos(20,0)
-		self:SetSize(150,27)
+		self:SetSize(250,27)
 		self:UPDBalance()
 		self:SetTooltip("Открыть список покупок")
 		self.Think = function(s)
@@ -97,7 +97,7 @@ function IGS.UI()
 		end
 
 		local add = uigs.Create("igs_button", mf)
-		add:SetPos(20 + 150 + 2,0)
+		add:SetPos(270,0)
 		add:SetSize(27,27)
 		add:SetText("+")
 		add:SetTooltip("Пополнение счета")

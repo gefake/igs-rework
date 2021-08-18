@@ -15,9 +15,10 @@ end
 
 function PANEL:SetTitle(sText)
 	self.title = self.title or uigs.Create("DLabel", function(t)
+		t:DockMargin(5, 5, 5, 5)
 		t:Dock(TOP)
-		t:SetTall(20)
-		t:SetFont("igs.20")
+		t:SetTall(50)
+		t:SetFont("igs.24")
 		t:SetTextColor(IGS.col.TEXT_HARD)
 		t:SetContentAlignment(5)
 		-- t:SetWrap(true) -- если раскомментить, то не будет работать SetContentAlignment
@@ -29,7 +30,7 @@ end
 
 function PANEL:AddColumn(sName,iWidePx)
 	self.columns_panel = self.columns_panel or uigs.Create("Panel", function(p)
-		p:SetTall(15)
+		p:SetTall(30)
 
 		self.header_tall = self.header_tall + p:GetTall()
 	end, self)
@@ -48,7 +49,7 @@ function PANEL:AddColumn(sName,iWidePx)
 
 			surface.SetFont("igs.15")
 			surface.SetTextColor(IGS.col.TEXT_SOFT)
-			surface.SetTextPos((w - surface.GetTextSize(sName)) / 2,0)
+			surface.SetTextPos((w - surface.GetTextSize(sName)) / 2, h * 0.25)
 			surface.DrawText(sName)
 		end
 	end, self.columns_panel))
@@ -66,18 +67,18 @@ function PANEL:AddLine(...)
 
 	local iKek = table.insert(self.lines,
 		self.scroll:AddItem(uigs.Create("Panel", function(line)
-			line:SetTall(18)
+			line:SetTall(32)
 			line:Dock(TOP)
 			line.columns = {}
 
-			-- self.columns[i]:GetWide()
 			for i,val in ipairs(rows) do
 				line.columns[i] = uigs.Create("DButton", function(row) -- Было Panel
 					row:SetText(val)
 					row.DoClick = function() if line.DoClick then line.DoClick(row) end end
 					row:SetCursor("arrow")
 					row:SetTall( line:GetTall() )
-					-- row:SetPos(self.columns[i]:GetPos())
+					row:SetPos(self.columns[i]:GetPos())
+					row:SetWide(self.columns[i]:GetWide())
 					row.Paint = function(s,w,h)
 						surface.SetDrawColor(IGS.col.HARD_LINE)
 						surface.DrawLine(3,h - 1,w - 2,h - 1)
@@ -87,7 +88,7 @@ function PANEL:AddLine(...)
 
 						surface.SetFont("igs.18")
 						surface.SetTextColor(IGS.col.TEXT_HARD)
-						surface.SetTextPos((w - surface.GetTextSize(s:GetText())) / 2,0)
+						surface.SetTextPos((w - surface.GetTextSize(s:GetText())) / 2, h * 0.25)
 						surface.DrawText(s:GetText())
 						return true -- override
 					end
@@ -118,7 +119,7 @@ PANEL.PaintOver = IGS.S.Outline
 
 function PANEL:PerformLayout()
 	if self.title then
-		self.header_tall = self.title:GetTall()
+		self.header_tall = self.title:GetTall() + 5
 	end
 
 	if self.columns_panel then

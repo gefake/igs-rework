@@ -142,7 +142,7 @@ function IGS.FormItemInfo(ITEM)
 		["Действует"] = IGS.TermToStr(ITEM:Term()),
 		["Цена"]       = PL_MONEY(ITEM:Price()),
 		["Без скидки"] = ITEM.discounted_from and PL_MONEY(ITEM.discounted_from) or nil,
-		["Покупки суммируются"]  = ITEM:IsStackable() and "да" or "нет",
+		["Стакается"]  = ITEM:IsStackable() and "да" or "нет",
 	}
 end
 
@@ -170,7 +170,7 @@ function IGS.SignPrice(iPrice) -- 10 Alc
 	return math.Truncate(tonumber(iPrice),2) .. " " .. IGS.C.CURRENCY_SIGN
 end
 
-local rubs = {"рубль", "рубля", "рублей"}
+local rubs = {"жетон", "жетона", "жетонов"}
 PL_MONEY = PL.Add("realmoney",rubs)
 PL_IGS   = PL.Add("igs_currency",IGS.C.CurrencyPlurals or rubs)
 PL_DAYS  = PL.Add("days",{"день", "дня", "дней"})

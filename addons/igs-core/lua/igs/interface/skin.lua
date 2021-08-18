@@ -7,21 +7,21 @@
 IGS.S = IGS.S or {}
 
 IGS.S.COLORS = {
-	FRAME_HEADER        = Color(255,255,255), -- Фон верхушки фреймов в т.ч. пополнения счета и т.д. https://img.qweqwe.ovh/1491950958825.png
-	ACTIVITY_BG         = Color(255,255,255), -- Фон в каждой вкладке (основной) https://img.qweqwe.ovh/1509370647204.png
-	TAB_BAR             = Color(250,250,250), -- Фон таб бара https://img.qweqwe.ovh/1509370669492.png
+	FRAME_HEADER        = Color(139,102,59), -- Фон верхушки фреймов в т.ч. пополнения счета и т.д. https://img.qweqwe.ovh/1491950958825.png
+	ACTIVITY_BG         = Color(117,90,57), -- Фон в каждой вкладке (основной) https://img.qweqwe.ovh/1509370647204.png
+	TAB_BAR             = Color(202,145,79), -- Фон таб бара https://img.qweqwe.ovh/1509370669492.png
 
-	PASSIVE_SELECTIONS  = Color(240,240,240), -- Фон панели тегов, цвет кнопки с балансом, верхушки таблиц, не выделенные кнопки https://img.qweqwe.ovh/1509370720597.png
-	INNER_SELECTIONS    = Color(255,255,255), -- Фон иконок на плашках, фон панелек последних покупок... https://img.qweqwe.ovh/1509370766148.png
+	PASSIVE_SELECTIONS  = Color(117,90,57), -- Фон панели тегов, цвет кнопки с балансом, верхушки таблиц, не выделенные кнопки https://img.qweqwe.ovh/1509370720597.png
+	INNER_SELECTIONS    = Color(177,151,121), -- Фон иконок на плашках, фон панелек последних покупок... https://img.qweqwe.ovh/1509370766148.png
 
-	SOFT_LINE           = Color(240,240,240), -- Линия между секциями, типа "Информация" и "Описание" в инфе об итеме
-	HARD_LINE           = Color(200,200,200), -- Обводки панелей
+	SOFT_LINE           = Color(255,208,164), -- Линия между секциями, типа "Информация" и "Описание" в инфе об итеме
+	HARD_LINE           = Color(132,105,75), -- Обводки панелей
 
-	HIGHLIGHTING        = Color(0,122,255),   -- Обводка кнопок, цвет текста не активной кнопки
+	HIGHLIGHTING        = Color(251,166,75),   -- Обводка кнопок, цвет текста не активной кнопки
 	HIGHLIGHT_INACTIVE  = Color(160,160,160), -- Цвет иконки неактивной кнопки таббара, мигающая иконка на фрейме помощи https://img.qweqwe.ovh/1509371884592.png
 
-	TEXT_HARD           = Color(0,0,0),       -- Заголовки, выделяющиеся тексты https://img.qweqwe.ovh/1509372019687.png
-	TEXT_SOFT           = Color(140,140,150), -- Описания, значения чего-то
+	TEXT_HARD           = Color(255,208,164),       -- Заголовки, выделяющиеся тексты https://img.qweqwe.ovh/1509372019687.png
+	TEXT_SOFT           = Color(255,227,215), -- Описания, значения чего-то
 	TEXT_ON_HIGHLIGHT   = Color(255,255,255), -- Цвет текста на выделенных кнопках
 
 	LOG_SUCCESS         = Color(76,217,100),  -- В логах пополнения цвет успешных операций
@@ -73,8 +73,8 @@ end
 
 -- https://img.qweqwe.ovh/1486557676799.png
 IGS.S.RoundedPanel = function(s,w,h)
-	draw.RoundedBox(3,0,0,w,h,        IGS.col.HARD_LINE) -- outline
-	draw.RoundedBox(3,1,1,w - 2,h - 2,IGS.col.INNER_SELECTIONS) -- bg
+	draw.RoundedBox(0,0,0,w,h,        IGS.col.HARD_LINE) -- outline
+	draw.RoundedBox(0,1,1,w - 2,h - 2,IGS.col.INNER_SELECTIONS) -- bg
 
 	return true
 end

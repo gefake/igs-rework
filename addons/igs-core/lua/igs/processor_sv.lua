@@ -71,7 +71,7 @@ hook.Add("PlayerInitialSpawn", "IGS.LoadPlayer", function(pl)
 			IGS.UpdatePlayerName(pl:SteamID64(), pl:Name())
 
 			-- подталкиваем тратить деньги
-			if bal_ > 10 then timer.Simple(10,function() suggestSpent(pl,bal_) end) end
+			-- if bal_ > 10 then timer.Simple(10,function() suggestSpent(pl,bal_) end) end
 		end
 	end)
 end)

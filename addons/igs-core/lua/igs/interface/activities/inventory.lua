@@ -21,14 +21,14 @@ local function loadTab(activity,sidebar,dat)
 		p:SetPos(0,0)
 		p:SetIcon()
 		p:SetName("")
-		p:SetDescription("Здесь будет отображена информация о вашей покупке, когда вы ее сделаете")
+		p:SetDescription("Здесь будет отображена информация о твоей покупке, когда вы ее сделаете")
 	end, bg)
 
 	local scr = uigs.Create("igs_scroll", bg)
 	scr:SetSize(activity:GetWide() - infpan:GetWide(),act_tall)
 	scr:SetPos(infpan:GetWide(),0) -- Dock(FILL)
 
-	IGS.AddTextBlock(scr,"Ваш инвентарь","Что-то тут пустовато. Надо бы купить че-нить, правда?")
+	IGS.AddTextBlock(scr,"Твой инвентарь","Что-то тут пустовато. Надо бы купить че-нить, правда?")
 
 	scr:AddItem( uigs.Create("DIconLayout", function(icons)
 		icons:SetWide(scr:GetWide())

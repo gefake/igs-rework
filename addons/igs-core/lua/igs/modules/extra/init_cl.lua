@@ -19,7 +19,7 @@ list.Set("DesktopWindows", "IGS",{
 	{currency_price} - цена единицы валюты (5)
 --------------------------------------------------------]]
 IGS.C.AboutCurrencyText = [[
-Автодонат имеет свою собственную валюту - {currency_name} ({currency_sign}). Это, как доллары, но в игре. Все цены в /donate магазине указаны в этой валюте.
+Автодонат имеет свою собственную валюту - {currency_name} ({currency_sign}). Это, как доллары, но в игре. Все цены в донат-магазине указаны в этой валюте.
 
 Сейчас 1 {currency_sign} стоит {currency_price} руб, но цена может немного вырасти или упасть в зависимости от некоторых факторов.
 
@@ -57,12 +57,12 @@ hook.Add("IGS.OnDepositWinOpen","CurrencyInfo",function()
 	if !IGS.IsCurrencyEnabled() then return end -- донат валюта отключена
 
 	-- Ни разу не пополнял и не видел подсказки
-	if !IGS.isUser(LocalPlayer()) and !getReadCurrencyInfoStatus() then
-		timer.Simple(0,function() -- чтобы не оказаться позади igs_frame
-			IGS.WIN.AboutCurrency(true)
-			setReadCurrencyInfoStatus(true)
-		end)
-	end
+	-- if !IGS.isUser(LocalPlayer()) and !getReadCurrencyInfoStatus() then
+	-- 	timer.Simple(0,function() -- чтобы не оказаться позади igs_frame
+	-- 		IGS.WIN.AboutCurrency(true)
+	-- 		setReadCurrencyInfoStatus(true)
+	-- 	end)
+	-- end
 end)
 
 -- IGS.UI()

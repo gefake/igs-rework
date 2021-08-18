@@ -12,26 +12,26 @@ hook.Add("IGS.Loaded", "NewItemsNotify", function()
 
 	if IGS.C.NotifyAboutNewItems == false then return end
 
-	local crc = util.CRC(game.GetIPAddress())
+	-- local crc = util.CRC(game.GetIPAddress())
 
-	local iItemsNow = #IGS.GetItems()
-	local iCached = bib.getNum("igs:lasttimeitems:" .. crc)
-	bib.setNum("igs:lasttimeitems:" .. crc, iItemsNow)
+	-- local iItemsNow = #IGS.GetItems()
+	-- local iCached = bib.getNum("igs:lasttimeitems:" .. crc)
+	-- bib.setNum("igs:lasttimeitems:" .. crc, iItemsNow)
 
-	if iCached and iCached < iItemsNow then
-		local new = iItemsNow - iCached
+	-- if iCached and iCached < iItemsNow then
+	-- 	local new = iItemsNow - iCached
 
-		local _,sNew    = PL_NEW(new) -- Чисто слово (новый, новых итд)
-		local _,sItems  = PL_ITEMS(new)
-		local _,sAppear = PL_POYAVILSA(new)
+	-- 	local _,sNew    = PL_NEW(new) -- Чисто слово (новый, новых итд)
+	-- 	local _,sItems  = PL_ITEMS(new)
+	-- 	local _,sAppear = PL_POYAVILSA(new)
 
-		local message =
-			"В нашем /donate магазине " .. sAppear .. " " .. new .. " " .. sNew .. " " .. sItems .. ". Желаете взглянуть?"
+	-- 	local message =
+	-- 		"В нашем /donate магазине " .. sAppear .. " " .. new .. " " .. sNew .. " " .. sItems .. ". Желаете взглянуть?"
 
-		IGS.BoolRequest("Пополнение магазина", message, function(aga)
-			if aga then
-				IGS.UI()
-			end
-		end)
-	end
+	-- 	IGS.BoolRequest("Пополнение магазина", message, function(aga)
+	-- 		if aga then
+	-- 			IGS.UI()
+	-- 		end
+	-- 	end)
+	-- end
 end)

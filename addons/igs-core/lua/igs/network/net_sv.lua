@@ -93,7 +93,7 @@ local function IGS_Purchase(pl, uid, cb)
 			pl.igs_unfinished_purchase = nil
 
 			if IGS.C.Inv_Enabled then
-				IGS.Notify(pl, "Ваша покупка находится в /donate инвентаре")
+				IGS.Notify(pl, "Ваша покупка находится в донат-инвентаре")
 			end
 
 			cb(invDbID_)

@@ -125,7 +125,7 @@ local function giveItemsSet(pl, tItems)
 		IGS.AddToInventory(pl, ITEM:UID(), function()
 			added = added + 1
 			if added == #tItems then
-				IGS.Notify(pl, "В ваш инвентарь добавлено " .. added .. " предметов")
+				IGS.Notify(pl, "В твой инвентарь добавлено " .. added .. " предметов")
 			end
 		end)
 	end

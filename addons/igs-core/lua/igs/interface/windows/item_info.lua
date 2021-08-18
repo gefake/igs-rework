@@ -161,7 +161,7 @@ function IGS.WIN.Item(uid)
 
 					IGS.BoolRequest(
 						"Недостаточно денег",
-						("Вам не хватает %s для покупки %s.\nЖелаете мгновенно пополнить счет?"):format( PL_IGS(need), ITEM:Name()),
+						("Тебе не хватает %s для покупки %s.\nХочешь мгновенно пополнить счет?"):format( PL_IGS(need), ITEM:Name()),
 						function(yes)
 							if yes then
 								IGS.WIN.Deposit(IGS.RealPrice(need), true)

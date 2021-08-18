@@ -11,7 +11,7 @@ end
 
 function IGS.ProcessActivate(dbID, cb)
 	IGS.Activate(dbID,function(ok, iPurchID, sMsg_)
-		sMsg_ = sMsg_ or "Предмет активирован. Спасибо вам!"
+		sMsg_ = sMsg_ or "Предмет активирован. Спасибо тебе!"
 		IGS.ShowNotify(sMsg_, ok and "Успешная активация" or "Ошибка активации")
 
 		if cb then

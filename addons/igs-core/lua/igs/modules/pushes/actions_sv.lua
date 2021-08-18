@@ -32,7 +32,7 @@ hook.Add("IGS.IncomingMessage","GivePurchase",function(d, method)
 	if !pl then return end
 
 	local ITEM = IGS.GivePurchase(pl,d.Item) -- выдает покупку без сохранения в БД
-	IGS.Notify(pl,"Вам выдана новая услуга: " .. ITEM:Name())
+	IGS.Notify(pl,"Тебе выдана новая услуга: " .. ITEM:Name())
 end)
 
 -- Перенос услуги (в т.ч. отключение)

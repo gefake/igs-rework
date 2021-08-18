@@ -102,7 +102,7 @@ hook.Add("IGS.PaymentStatusUpdated","NoRejoiningCharge",function(pl,dat)
 	timer.Simple(1,function() -- даем успеть в БД обновить данные
 
 		updateBalance(pl,function(new_bal_, diff)
-			IGS.Notify(pl, "Спасибо вам за пополнение счета. Вы прелесть :3")
+			IGS.Notify(pl, "Спасибо тебе за поддержку!")
 			hook.Run("IGS.PlayerDonate", pl, diff, new_bal_)
 			suggestSpent(pl, new_bal_)
 		end, true) -- updateBalance with bGiveBonuses

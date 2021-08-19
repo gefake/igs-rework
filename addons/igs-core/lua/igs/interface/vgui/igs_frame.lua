@@ -46,7 +46,6 @@ end
 
 
 function PANEL:Close(...)
-	surface.PlaySound("ambient/water/rain_drip3.wav")
 	self.BaseClass.Close(self, ...)
 	if self.remember_uid then
 		self:SaveLocation(self.remember_uid)

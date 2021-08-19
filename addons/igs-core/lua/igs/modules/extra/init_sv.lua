@@ -14,7 +14,8 @@ end
 ---------------------------------------------------------------------------]]
 local n = function(pl, msg)
 	if IsValid(pl) then
-		IGS.Notify(pl,msg)
+		pl:Notify(msg)
+		-- IGS.Notify(pl,msg)
 	else
 		print(msg)
 	end
@@ -110,8 +111,7 @@ hook.Add("IGS.PaymentStatusUpdated","IGS.BroadcastCharge",function(pl,dat)
 		-- IGS.NotifyAll(pl:Nick() .. " пополнил счет через " .. method_beauty .. " на " .. PL_MONEY(rub))
 
 	elseif dat.method == "error" then
-		IGS.Notify(pl,"Похоже, у вас возникла ошибка в процессе пополнения счета")
-		IGS.Notify(pl,"Мы можем помочь. Просто напишите нам gm-donate.ru/support")
+		pl:Notify("Похоже, у вас возникла ошибка в процессе пополнения счета. Мы можем помочь. Просто напишите нам gm-donate.ru/support")
 	end
 end)
 

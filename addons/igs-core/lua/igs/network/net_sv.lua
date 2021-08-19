@@ -34,7 +34,8 @@ local function checkNotReady(pl) -- не даем совершать никак�
 	end
 
 	if (not IGS.REPEATER:IsEmpty()) then
-		IGS.Notify(pl,"Автодонат временно не работает")
+		pl:Notify("Автодонат временно не работает")
+		-- IGS.Notify(pl,"Автодонат временно не работает")
 		return true
 	end
 end
@@ -93,7 +94,8 @@ local function IGS_Purchase(pl, uid, cb)
 			pl.igs_unfinished_purchase = nil
 
 			if IGS.C.Inv_Enabled then
-				IGS.Notify(pl, "Ваша покупка находится в донат-инвентаре")
+				pl:Notify("Твоя покупка находится в донат-инвентаре")
+				-- IGS.Notify(pl, "Ваша покупка находится в донат-инвентаре")
 			end
 
 			cb(invDbID_)
@@ -118,7 +120,8 @@ net_ReceiveProtected("IGS.Purchase", function(pl)
 		if errMsg_ then
 			local ITEM = IGS.GetItemByUID(sItemUID)
 			hook.Run("IGS.OnFailedPurchase", pl, ITEM, errMsg_)
-			IGS.Notify(pl,"Ошибка покупки " .. sItemUID .. ": " .. errMsg_)
+			pl:Notify("Ошибка покупки " .. sItemUID .. ": " .. errMsg_)
+			-- IGS.Notify(pl,"Ошибка покупки " .. sItemUID .. ": " .. errMsg_)
 		end
 	end)
 end)

@@ -6,7 +6,6 @@ local function purchase(ITEM, buy_button)
 
 		if errMsg then
 			IGS.ShowNotify(errMsg, "Ошибка покупки")
-			surface.PlaySound("ambient/voices/citizen_beaten1.wav") -- еще есть
 			return
 		end
 
@@ -34,8 +33,6 @@ local function purchase(ITEM, buy_button)
 				IGS.ProcessActivate(dbID)
 			end)
 		end
-
-		surface.PlaySound("ambient/office/coinslot1.wav")
 	end)
 end
 
@@ -91,8 +88,6 @@ function IGS.WIN.Item(uid)
 		m:Close()
 		m = nil
 	end
-
-	surface.PlaySound("ambient/weather/rain_drip1.wav")
 
 	m = uigs.Create("igs_frame", function(self)
 		self:SetSize(450,550)

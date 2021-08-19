@@ -74,7 +74,8 @@ function STORE_ITEM:SetMaxPlayerPurchases(iLimit)
 			local key = bibKey(pl:UniqueID(), self:UID())
 			local now_purchased = bib.getNum(key, 0) + 1
 			bib.setNum(key, now_purchased)
-			IGS.Notify(pl, "Вы купили " .. self:Name() .. " " .. now_purchased .. " раз из " .. limit)
+			pl:Notify("Ты купил " .. self:Name() .. " " .. now_purchased .. " раз из " .. limit)
+			-- IGS.Notify(pl, "Вы купили " .. self:Name() .. " " .. now_purchased .. " раз из " .. limit)
 		end
 	end):SetMeta("purchasesLimit", iLimit)
 end
@@ -94,7 +95,8 @@ hook.Add("IGS.PlayerActivatedItem", "IGS.GlobalPurchase", function(pl, ITEM)
 			if sv_id == IGS.SERVERS.CURRENT then continue end -- уже выдано
 			IGS.StorePurchase(pl:SteamID64(), ITEM:UID(), ITEM:Term(), sv_id)
 		end
-		IGS.Notify(pl, "Предмет выдан на " .. IGS.SERVERS.TOTAL .. " серверах")
+		pl:Notify("Предмет выдан на " .. IGS.SERVERS.TOTAL .. " серверах")
+		-- IGS.Notify(pl, "Предмет выдан на " .. IGS.SERVERS.TOTAL .. " серверах")
 	end
 end)
 
@@ -107,7 +109,8 @@ local function giveRandomItem(pl, tItems)
 	local WINNED_ITEM = table.Random(tItems)
 
 	IGS.PlayerActivateItem(pl, WINNED_ITEM:UID(), function()
-		IGS.Notify(pl, "Вы получили " .. WINNED_ITEM:Name())
+		pl:Notify("Ты получил " .. WINNED_ITEM:Name())
+		-- IGS.Notify(pl, "Вы получили " .. WINNED_ITEM:Name())
 	end)
 end
 
@@ -125,7 +128,8 @@ local function giveItemsSet(pl, tItems)
 		IGS.AddToInventory(pl, ITEM:UID(), function()
 			added = added + 1
 			if added == #tItems then
-				IGS.Notify(pl, "В твой инвентарь добавлено " .. added .. " предметов")
+				pl:Notify("В твой донат-инвентарь добавлено " .. added .. " предметов")
+				-- IGS.Notify(pl, "В твой инвентарь добавлено " .. added .. " предметов")
 			end
 		end)
 	end

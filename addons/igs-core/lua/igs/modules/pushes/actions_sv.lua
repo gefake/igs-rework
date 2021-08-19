@@ -32,7 +32,8 @@ hook.Add("IGS.IncomingMessage","GivePurchase",function(d, method)
 	if !pl then return end
 
 	local ITEM = IGS.GivePurchase(pl,d.Item) -- выдает покупку без сохранения в БД
-	IGS.Notify(pl,"Тебе выдана новая услуга: " .. ITEM:Name())
+	pl:Notify("Тебе выдана новая услуга: " .. ITEM:Name())
+	-- IGS.Notify(pl,"Тебе выдана новая услуга: " .. ITEM:Name())
 end)
 
 -- Перенос услуги (в т.ч. отключение)
@@ -44,9 +45,10 @@ hook.Add("IGS.IncomingMessage","MovePurchase",function(d, method)
 
 	-- Просто перезагружаем данные
 	-- Если перенос был на этот сервер, то услуга будет выдана (или забрана. С :HasPurchase)
-	IGS.Notify(pl, "Перезагрузка списка покупок из-за переноса или отключения услуг")
+	pl:Notify("Перезагрузка списка покупок из-за переноса или отключения услуг")
+	-- IGS.Notify(pl, "Перезагрузка списка покупок из-за переноса или отключения услуг")
 	IGS.LoadPlayerPurchases(pl,function()
-		IGS.Notify(pl,"Список перезагружен")
+		pl:Notify("Список перезагружен")
 	end)
 end)
 
@@ -64,9 +66,11 @@ hook.Add("IGS.IncomingMessage","InventoryActions",function(d, method)
 	local pl = getPlayer(d)
 	if !pl then return end
 
-	IGS.Notify(pl, "Перезагрузка инвентаря")
+	pl:Notify("Перезагрузка донат-инвентаря...")
+	-- IGS.Notify(pl, "Перезагрузка инвентаря")
 	IGS.LoadInventory(pl,function()
-		IGS.Notify(pl, "Инвентарь перезагружен")
+		pl:Notify("Донат-инвентарь перезагружен успешно")
+		-- IGS.Notify(pl, "Инвентарь перезагружен")
 	end)
 end)
 

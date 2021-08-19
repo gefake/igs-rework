@@ -7,7 +7,6 @@ function IGS.WIN.Deposit(iRealSum)
 	if IsValid(m) then return end -- не даем открыть 2 фрейма
 	iRealSum = tonumber(iRealSum)
 
-	surface.PlaySound("ambient/weather/rain_drip1.wav")
 	hook.Run("IGS.OnDepositWinOpen",iRealSum)
 
 	local cd = !IGS.IsCurrencyEnabled() -- cd = currency disabled. Bool

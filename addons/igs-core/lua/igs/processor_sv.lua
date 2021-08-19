@@ -54,7 +54,8 @@ local function updateBalance(pl, fOnFinish, bGiveBonuses)
 end
 
 local function suggestSpent(pl,bal)
-	IGS.Notify(pl, "Вы можете потратить " .. IGS.SignPrice(bal) .. " через /donate")
+	pl:Notify("Твой баланс: " .. IGS.SignPrice(bal))
+	-- IGS.Notify(pl, "Твой баланс: " .. IGS.SignPrice(bal))
 end
 
 hook.Add("PlayerInitialSpawn", "IGS.LoadPlayer", function(pl)
@@ -102,7 +103,8 @@ hook.Add("IGS.PaymentStatusUpdated","NoRejoiningCharge",function(pl,dat)
 	timer.Simple(1,function() -- даем успеть в БД обновить данные
 
 		updateBalance(pl,function(new_bal_, diff)
-			IGS.Notify(pl, "Спасибо тебе за поддержку!")
+			pl:Notify("Спасибо тебе за поддержку!")
+			-- IGS.Notify(pl, "Спасибо тебе за поддержку!")
 			hook.Run("IGS.PlayerDonate", pl, diff, new_bal_)
 			suggestSpent(pl, new_bal_)
 		end, true) -- updateBalance with bGiveBonuses

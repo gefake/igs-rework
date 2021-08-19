@@ -9,8 +9,6 @@ function IGS.WIN.Group(sGroupUID)
 	local GROUP = IGS.GetGroup(sGroupUID)
 	assert(GROUP, "Incorrect group: " .. tostring(sGroupUID))
 
-	surface.PlaySound("ambient/weather/rain_drip1.wav")
-
 	return uigs.Create("igs_frame", function(bg)
 		bg:SetTitle(GROUP:Name())
 		bg:MakePopup()

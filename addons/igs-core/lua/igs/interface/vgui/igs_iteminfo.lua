@@ -169,14 +169,14 @@ function PANEL:SetDescription(sDescription)
 
 	self:InvalidateParent(true)
 	local w = self:GetWide()
-	local txt = string.Wrap("igs.15", sDescription, w - 10 - 10)
+	local txt = string.Wrap("ixSmallFont", sDescription, w - 10 - 10)
 	local y   = 0
 
 	for _,line in ipairs(txt) do
 		uigs.Create("DLabel", function(d)
 			d:SetPos(0,y)
 			d:SetSize(w,15)
-			d:SetFont("igs.15")
+			d:SetFont("ixSmallFont")
 			d:SetTextColor(IGS.col.TEXT_SOFT)
 			d:SetText(line)
 

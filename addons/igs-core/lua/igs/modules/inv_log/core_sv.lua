@@ -79,7 +79,8 @@ net.Receive("IGS.DeactivateItem", function(_, pl)
 	if !(iPurchID and pl:IsSuperAdmin()) then return end
 
 	IGS.DisablePurchase(iPurchID, function(bUpdated)
-		IGS.Notify(pl, bUpdated and "Покупка отключена" or "Услуга уже отключена")
+		pl:Notify(bUpdated and "Покупка отключена" or "Услуга уже отключена")
+		-- IGS.Notify(pl, bUpdated and "Покупка отключена" or "Услуга уже отключена")
 	end)
 end)
 

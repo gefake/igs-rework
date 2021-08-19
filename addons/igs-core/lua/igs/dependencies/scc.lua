@@ -21,23 +21,23 @@ end
 
 
 if SERVER then
-	hook.Add("PlayerSay", "scc", function(pl, text)
-		text = text:Trim()
-		if text[1] == "/" then
-			local pieces  = text:Split(" ")
-			local command = pieces[1]:sub(2):lower()
+	-- hook.Add("PlayerSay", "scc", function(pl, text)
+	-- 	text = text:Trim()
+	-- 	if text[1] == "/" then
+	-- 		local pieces  = text:Split(" ")
+	-- 		local command = pieces[1]:sub(2):lower()
 
-			if scc.commands[command] then
-				local args = {}
-				for i = 2,#pieces do
-					args[#args + 1] = pieces[i]
-				end
+	-- 		if scc.commands[command] then
+	-- 			local args = {}
+	-- 			for i = 2,#pieces do
+	-- 				args[#args + 1] = pieces[i]
+	-- 			end
 
-				scc.run(pl, command, args)
-				return ""
-			end
-		end
-	end)
+	-- 			scc.run(pl, command, args)
+	-- 			return ""
+	-- 		end
+	-- 	end
+	-- end)
 end
 
 

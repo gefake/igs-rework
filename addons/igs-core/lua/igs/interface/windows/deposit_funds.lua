@@ -19,7 +19,7 @@ function IGS.WIN.Deposit(iRealSum)
 	function f:Paint(w, h)
 		draw.RoundedBox(0, -1, -1, w+2, h+2, Color(0,0,0, 225))
 	end
-	function f:DoClick()
+	function f:OnMousePressed()
 		if IsValid(m) then
 			m:Remove()
 		end

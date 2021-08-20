@@ -40,11 +40,14 @@ end
 function PANEL:Paint(w,h)
 	if (!self:GetTexture() and !self.Rendering) or (self:GetURL() ~= self.LastURL and !self.Rendering) then
 		self:RenderTexture()
-
 	elseif self:GetTexture() then
 		surface.SetDrawColor(IGS.col.ICON)
 		surface.SetMaterial( self:GetTexture() )
 		surface.DrawTexturedRect(0,0,w,h)
+	end
+
+	if self.Rendering then
+		draw.SimpleText("Загрузка...", "ixMenuButtonFontSmall", w * 0.5, h * 0.5, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 end
 

@@ -45,11 +45,12 @@ function IGS.WIN.Deposit(iRealSum)
 			Левая колонка. Реальная валюта
 		---------------------------------------]]
 
-		self.real_m = uigs.Create("DTextEntry", self)
-		self.real_m:SetPos(5,30)
-		self.real_m:SetFont("ixMediumFont")
-		self.real_m:SetSize(cd and 450 - 5 - 5 or 180, 50)
+		self.real_m = uigs.Create("ixTextEntry", self)
+		self.real_m:SetPos(10,35)
+		self.real_m:SetFont("ixMenuButtonFont")
+		self.real_m:SetSize(cd and 450 - 10 - 10 or 180, 50)
 		self.real_m:SetNumeric(true)
+		self.real_m.backgroundColor = Color(251, 166, 75, 125)
 		self.real_m.OnChange = function(s)
 			if cd then return end
 			self.curr_m:SetValue(IGS.PriceInCurrency( niceSum(s:GetValue(),0) )) -- бля
@@ -58,7 +59,7 @@ function IGS.WIN.Deposit(iRealSum)
 			local rub = tonumber(self.real_m:GetValue())
 			if cd then
 				self.purchase:SetText(
-					"Пополнить счет на " .. PL_IGS(niceSum(rub,0))
+					"Пополнить на " .. PL_IGS(niceSum(rub,0))
 				)
 			else
 				local igs = tonumber(self.curr_m:GetValue())
@@ -93,12 +94,21 @@ function IGS.WIN.Deposit(iRealSum)
 		self.purchase = uigs.Create("igs_button", function(p)
 			local _,ry = self.real_m:GetPos()
 
-			p:SetSize(436,60)
+			p:SetSize(430,60)
 			p:SetActive(true) -- выделяет синим
+			p:SetFont("ixMenuButtonFontSmall")
 			p:SetPos((self:GetWide() - p:GetWide()) / 2,ry + self.real_m:GetTall() + 10)
 
+			function p:Paint(w,h)
+				local strokeCol = self.Hovered and Color(53, 156, 108) or Color(53, 156, 108, 185)
+				draw.RoundedBox(4,0,0,w,h, strokeCol) -- outline
+				if !self.active then
+					draw.RoundedBox(4,1,1,w - 2,h - 2,IGS.col.PASSIVE_SELECTIONS) -- bg TODO изменить, сделав как-то прозрачным
+				end
+			end
+
 			p.DoClick = function()
-				local want_money = niceSum(self.real_m:GetValue())
+				local want_money = self.real_m:GetValue() ~= "" and niceSum(self.real_m:GetValue()) or false
 				if !want_money then
 					self.log:AddRecord("Указана некорректная сумма пополнения", false)
 					return
@@ -155,8 +165,8 @@ function IGS.WIN.Deposit(iRealSum)
 			Все подряд
 		---------------------------------------------------------------------------]]
 		self.log = uigs.Create("igs_scroll", function(log)
-			log:SetSize(self:GetWide(),165)
-			log:SetPos(10,self:GetTall() - log:GetTall() - 40)
+			log:SetSize(self:GetWide(),178)
+			log:SetPos(10,self:GetTall() - log:GetTall() - 20)
 			-- https://img.qweqwe.ovh/1487171563683.png
 			function log:AddRecord(text,pay)
 				local col =
@@ -214,17 +224,17 @@ function IGS.WIN.Deposit(iRealSum)
 		end, self)
 
 
-		local coupon = uigs.Create("igs_button", function(btn)
-			local _,log_y = self.log:GetPos()
+		-- local coupon = uigs.Create("igs_button", function(btn)
+		-- 	local _,log_y = self.log:GetPos()
 
-			btn:SetSize(170, 30)
-			btn:DockMargin(4, 4, 4, 4)
-			btn:Dock(BOTTOM)
-			btn:SetText("Активировать купон")
-			btn.DoClick = function()
-				IGS.WIN.ActivateCoupon()
-			end
-		end, self)
+		-- 	btn:SetSize(170, 30)
+		-- 	btn:DockMargin(4, 4, 4, 4)
+		-- 	btn:Dock(BOTTOM)
+		-- 	btn:SetText("Активировать купон")
+		-- 	btn.DoClick = function()
+		-- 		IGS.WIN.ActivateCoupon()
+		-- 	end
+		-- end, self)
 
 
 		-- uigs.Create("DLabel", function(btns_title)

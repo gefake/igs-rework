@@ -108,6 +108,7 @@ hook.Add("IGS.PaymentStatusUpdated","IGS.BroadcastCharge",function(pl,dat)
 		local igs = dat.orderSum
 		local rub = IGS.RealPrice(igs)
 
+		ix.config.Set("donateCurrentSum", ix.config.Get("donateCurrentSum") + igs)
 		-- IGS.NotifyAll(pl:Nick() .. " пополнил счет через " .. method_beauty .. " на " .. PL_MONEY(rub))
 
 	elseif dat.method == "error" then

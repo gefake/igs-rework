@@ -102,7 +102,7 @@ end
 
 -- Стоимость 1 донат валюты в рублях
 function IGS.GetCurrencyPrice()
-	return 1
+	return getSettings()[2]
 end
 
 -- Не смог загрузиться или выключен в панели, меню открывать нельзя

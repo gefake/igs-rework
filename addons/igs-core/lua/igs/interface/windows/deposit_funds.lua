@@ -12,21 +12,6 @@ function IGS.WIN.Deposit(iRealSum)
 	local cd = !IGS.IsCurrencyEnabled() -- cd = currency disabled. Bool
 	local realSum = math.max(IGS.GetMinCharge(), niceSum(iRealSum, 0))
 
-	f = vgui.Create('DButton')
-	f:SetSize(ScrW(), ScrH())
-	f:MakePopup()
-	f:SetText('')
-	function f:Paint(w, h)
-		draw.RoundedBox(0, -1, -1, w+2, h+2, Color(0,0,0, 225))
-	end
-	function f:OnMousePressed()
-		if IsValid(m) then
-			m:Remove()
-		end
-
-		f:Remove()
-	end
-
 	m = uigs.Create("igs_frame", function(self)
 		self:SetSize(450,400)
 		self:SetTitle("Пополнение жетонов Метро")
@@ -70,11 +55,6 @@ function IGS.WIN.Deposit(iRealSum)
 			end
 
 			self.purchase:SetActive(rub and rub > 0)
-		end
-		self.OnRemove = function(this)
-			if IsValid(f) then
-				f:Remove()
-			end
 		end
 
 		--[[-------------------------------------

@@ -60,21 +60,6 @@ end
 function IGS.WIN.Item(uid)
 	local ITEM = IGS.GetItemByUID(uid)
 
-	f = vgui.Create('DButton')
-	f:SetSize(ScrW(), ScrH())
-	f:MakePopup()
-	f:SetText('')
-	function f:Paint(w, h)
-		draw.RoundedBox(0, -1, -1, w+2, h+2, Color(0,0,0, 225))
-	end
-	function f:OnMousePressed()
-		if IsValid(m) then
-			m:Remove()
-		end
-
-		f:Remove()
-	end
-
 	if IsValid(m) then
 		if m.item_uid == uid then -- попытка повторного открытия того же фрейма
 
@@ -94,11 +79,6 @@ function IGS.WIN.Item(uid)
 		self:Center()
 		self:MakePopup()
 		self:SetTitle(ITEM:Name())
-		self.OnRemove = function(this)
-			if IsValid(f) then
-				f:Remove()
-			end
-		end
 
 		self.item_uid  = uid -- для предотвращения повторного открытия двух одинаковых фреймов
 	end)
